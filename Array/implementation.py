@@ -1,11 +1,13 @@
 import ctypes
 
-# insert
+
 # remove
-# __getitem__
-# __delitem__
-
-
+# extras features:
+# sort/min/max/sum
+# extend
+# negative indexing
+# slicing
+# merge
 class myArray:
     def __init__(self) -> None:
         # capacity of Array
@@ -42,7 +44,7 @@ class myArray:
 
     def pop(self):
         if self.n == 0:
-            print("List is empty")
+            return Exception("List is empty")
         print(self.A[self.n - 1])
         self.n = self.n - 1
 
@@ -54,22 +56,50 @@ class myArray:
         for i in range(self.n):
             if self.A[i] == ele:
                 return i
-        return "ValueError - not in list"
+        raise ValueError(f"ValueError - {ele} not in list")
+
+    def __getitem__(self, index):
+        if index < self.size:
+            return self.A[index]
+        else:
+            raise IndexError(
+                "Index out of range: The provided index is not valid for this list."
+            )
+
+    def insert(self, index, ele):
+        if self.size == self.n:
+            self.resize(1)
+        for i in range(self.n, index, -1):
+            self.A[i] = self.A[i - 1]
+        self.n = self.n + 1
+        self.A[index] = ele
+
+    def __delitem__(self, index):
+        if 0 <= index < self.n:
+            for i in range(index, self.n - 1, +1):
+                self.A[i] = self.A[i + 1]
+            self.n = self.n - 1
+        else:
+            raise IndexError(
+                "Index out of range: The provided index is not valid for this list."
+            )
+
+    def remove(self, ele):
+        index = self.find(ele)
+        self.__delitem__(index)
 
 
 L = myArray()
+L.append(0)
+L.append(1)
+L.append(2)
+L.append(3)
+L.append(4)
 L.append(5)
 L.append(6)
+L.append(7)
 L.append(8)
-L.append(6)
-L.append(8)
-L.append(5)
-L.append(6)
-L.append(8)
-L.append(6)
-L.append(8)
-
+L.append(9)
 print(L)
-index = L.find(8)
-print(index)
+del L[9]
 print(L)
