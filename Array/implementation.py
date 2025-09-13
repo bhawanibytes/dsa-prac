@@ -1,6 +1,9 @@
 import ctypes
 
-
+# copy()	Returns a copy of the list
+# extend()	Add the elements of a list (or any iterable), to the end of the current list
+# reverse()	Reverses the order of the list
+# sort()	Sorts the list
 # remove
 # extras features:
 # sort/min/max/sum
@@ -42,17 +45,22 @@ class myArray:
             newArr[i] = self.A[i]
         self.A = newArr
 
-    def pop(self):
-        if self.n == 0:
-            return Exception("List is empty")
-        print(self.A[self.n - 1])
-        self.n = self.n - 1
+    def pop(self, index=None):
+        if index is None:
+            if self.n == 0:
+                raise IndexError(
+                    "Index out of range: The provided index is not valid for this list."
+                )
+            print(self.A[self.n - 1])
+            self.n = self.n - 1
+        else:
+            self.__delitem__(index)
 
     def clear(self):
         self.n = 0
         self.size = 1
 
-    def find(self, ele):
+    def index(self, ele):
         for i in range(self.n):
             if self.A[i] == ele:
                 return i
@@ -85,8 +93,15 @@ class myArray:
             )
 
     def remove(self, ele):
-        index = self.find(ele)
+        index = self.index(ele)
         self.__delitem__(index)
+
+    def count(self, ele):
+        count = 0
+        for i in self.A:
+            if i == ele:
+                count = count + 1
+        return count
 
 
 L = myArray()
@@ -102,4 +117,13 @@ L.append(8)
 L.append(9)
 print(L)
 del L[9]
+L.count(0)
 print(L)
+print(type(L))
+OgList = []
+listUsingConstructor = list(())
+print(type(OgList))
+print(OgList)
+print(listUsingConstructor)
+print(type(listUsingConstructor))
+OgList.count
