@@ -1,0 +1,13 @@
+# ruff.toml
+
+[lint]
+# Ignore indentation-related errors (PEP8 wants 4 spaces, we’re overriding)
+ignore = [
+  "E111", # indentation is not a multiple of four
+  "E114", # indentation is not a multiple of four (comment)
+  "E117", # over-indented
+  "E501", # won't complain on long lines
+]
+
+# Optional: choose a default rule set (still keeps code clean, just ignores indentation rules)
+select = ["E", "F", "W"]
